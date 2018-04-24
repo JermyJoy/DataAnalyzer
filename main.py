@@ -79,6 +79,7 @@ def clean_date(release_date):
                 month.append('N/A')
                 year.append('N/A')
                 day.append('N/A')
+        
 
 
 def clean_budget(budgetlist):
@@ -117,6 +118,7 @@ def main():
     collect_data('NBCU_data.csv')
 
     clean_release = clean_date(release_date)
+    print clean_release
 
     clean_length = min_remove(length_of_movie)
 
@@ -134,8 +136,6 @@ def main():
     clean_INITbudget = clean_vals(clean_INITbudget)
     clean_box = clean_vals(clean_box)
 
-    for index in clean_box:
-        print index
 
 
 if __name__ == '__main__':

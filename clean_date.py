@@ -1,23 +1,60 @@
-def clean_date(release_date):
-        month = [];
-        day = [];
-        year = [];
-        
-        for date in range(1,len(release_date)):
-            val = release_date[date].split('-')
-            day.append(val[0]);
-            try:
-                if (val[0] == 'N/A' ):
-                    month.append('N/A')
-                    year.append('N/A');
-                else:
-                    month.append(val[1]);
-                    year.append(val[2]);
-            except IndexError:
-                month.append('N/A')
-                year.append('N/A')
-                day.append('N/A')
+import os
+import sys
+import csv 
 
-        print(month[1]) # for first movie
-        print(day[1]) # for first movie
-        print(year[1]) # for first movie
+
+def season_determine(val):
+        month_seasons = {"Jan" : "Winter", "Feb" : "Winter", "Dec" : "Winter", "Mar" : "Spring", "Apr" : "Spring", "May" : "Spring", "Jun" : "Summer", "Jul" : "Summer", "Aug" : "Summer", "Sep" : "Fall", "Oct" : "Fall", "Nov" : "Fall" };
+        for i in range(1,len(val)):
+                if val[i] in month_seasons:
+                        val[i] = month_seasons[val[i]]
+        return val
+
+def main():
+        month = []; # 7
+        meta = []; # 4 
+        name = []; # 0
+        prod = []; # 1
+        age = []; # 2
+        imdb = []; # 3
+        num_votes = []; # 5
+        day = []; # 6
+        year = []; # 8
+        budget = []; # 9
+        box_office = []; # 10
+        multiplier = []; # 11
+        
+        print "starting..."
+        with open('full_dataset.csv') as csv_file:
+                val = csv.reader(csv_file)
+                for row in val:
+                        name.append(row[0])
+                        prod.append(row[1])
+                        age.append(row[2])
+                        imdb.append(row[3])
+                        meta.append(row[4])
+                        num_votes.append(row[5])
+                        day.append(row[6])
+                        month.append(row[7])
+                        year.append(row[8])
+                        budget.append(row[9])
+                        box_office.append(row[10])
+                        multiplier.append(row[11])
+        season = season_determine(month)
+        #remove the header
+        name = name[1:]
+        prod = prod[1:]
+        age = age[1:]
+        imdb = imdb[1:]
+        meta = meta[1:]
+        num_votes = num_votes[1:]
+        day = day[1:]
+        month = month[1:]
+        year = year[1:]
+        budget = budget[1:]
+        box_office = box_office[1:]
+        multiplier = multiplier[1:]
+        
+        
+if __name__ == '__main__':
+        main();

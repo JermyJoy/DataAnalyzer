@@ -27,15 +27,15 @@ def main():
             production.append(lines[7]) # production company in 7th index
             imbd_rating.append(lines[4]) # imbd rating in the 4th index
             meta_rating.append(lines[5]) # meta critic rating in the 5th index
-            age_rating.append(lines[3]) # movie rating in the 3rd index 
-            num_votes.append(lines[9]) # number of votes in the 9th index 
-            budget.append(lines[17]) # budget in the 17th index 
-            Box_office.append(lines[18]) # profites in the 18th index 
+            age_rating.append(lines[3]) # movie rating in the 3rd index
+            num_votes.append(lines[9]) # number of votes in the 9th index
+            budget.append(lines[17]) # budget in the 17th index
+            Box_office.append(lines[18]) # profites in the 18th index
 
 
 ########### TEMP PRINT STATEMENTS #############
-        print(name_of_movie[1]) 
-        print(length_of_movie[1]) 
+        print(name_of_movie[1])
+        print(length_of_movie[1])
         print(release_date[1])
         print(production[1])
         print(imbd_rating[1])

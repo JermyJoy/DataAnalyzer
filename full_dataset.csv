@@ -1,5 +1,4 @@
 name,production,age_rating,imbd_rating,meta_rating,num_votes,day,month,year,budget,box_office,multiplier
-title,production,rating,imdb_rating,metacritic,imdb_votes,release_date,N/A,N/A,,,0.0
 The Cabinet of Dr. Caligari,Rialto Pictures,UNRATED,8.1,,"42,583",N/A,Mar,21,18000,0,0.0
 Hiroshima Mon Amour,Rialto Pictures,NOT RATED,8,,"21,154",19,May,60,88300,0,0.0
 Alphaville,Rialto Pictures,NOT RATED,7.2,,"17,801",16,May,65,220000,46585,0.21175

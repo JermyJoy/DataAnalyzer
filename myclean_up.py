@@ -162,6 +162,21 @@ def main(argv):
     clean.gross_multiplier = clean.add_multiplier(clean.Box_office, clean.budget)
     print len(clean.gross_multiplier)
 
+    # remove existing header
+    #
+    clean.name_of_movie.pop(0)
+    clean.production.pop(0)
+    clean.age_rating.pop(0)
+    clean.imbd_rating.pop(0)
+    clean.meta_rating.pop(0)
+    clean.num_votes.pop(0)
+    clean.day.pop(0)
+    clean.month.pop(0)
+    clean.year.pop(0)
+    clean.budget.pop(0)
+    clean.Box_office.pop(0)
+    clean.gross_multiplier.pop(0)
+
     # insert column headers 
     #
     clean.name_of_movie.insert(0, 'name')

@@ -1,30 +1,47 @@
 import os
 import sys
-import csv 
+import csv
 
+import pandas as pd
+import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+
+from operator import itemgetter, attrgetter
 
 def season_determine(val):
-        month_seasons = {"Jan" : "Winter", "Feb" : "Winter", "Dec" : "Winter", "Mar" : "Spring", "Apr" : "Spring", "May" : "Spring", "Jun" : "Summer", "Jul" : "Summer", "Aug" : "Summer", "Sep" : "Fall", "Oct" : "Fall", "Nov" : "Fall" };
-        for i in range(1,len(val)):
+        month_seasons = {"Jan": "Winter", "Feb": "Winter", "Dec": "Winter",
+                         "Mar": "Spring", "Apr": "Spring", "May": "Spring", "Jun": "Summer",
+                         "Jul": "Summer", "Aug": "Summer", "Sep": "Fall",
+                         "Oct": "Fall", "Nov": "Fall"}
+
+        for i in range(1, len(val)):
                 if val[i] in month_seasons:
                         val[i] = month_seasons[val[i]]
         return val
 
+
 def main():
-        month = []; # 7
-        meta = []; # 4 
-        name = []; # 0
-        prod = []; # 1
-        age = []; # 2
-        imdb = []; # 3
-        num_votes = []; # 5
-        day = []; # 6
-        year = []; # 8
-        budget = []; # 9
-        box_office = []; # 10
-        multiplier = []; # 11
-        
+
         print "starting..."
+
+        # initializing  the columns
+        #
+        name = []
+        prod = []
+        age = []
+        imdb = []
+        meta = []
+        num_votes = []
+        day = []
+        month = []
+        year = []
+        budget = []
+        box_office = []
+        multiplier = []
+
+        # filing the columns from the csv file
+        #
         with open('full_dataset.csv') as csv_file:
                 val = csv.reader(csv_file)
                 for row in val:
@@ -40,8 +57,24 @@ def main():
                         budget.append(row[9])
                         box_office.append(row[10])
                         multiplier.append(row[11])
-        season = season_determine(month)
+
         # for the months to store to dict....
-        
+        #
+        season = season_determine(month)
+
+        # set te columns in rows so we can work on becomes a list of tuples
+        # usage: final_data[row][column]
+        # DEBUG: use final_data = np.array(final_data) --> final_data[row,column] ?
+        #
+        final_data = zip(name, prod, age, imdb, meta, num_votes, day, month, year,
+                        budget, box_office, multiplier)
+
+        final_np = np.array(final_data)
+
+        # Sorting by column
+        #
+        print final_np[np.argsort(final_np[:, 11])[::-1]][:, 0]
+
+
 if __name__ == '__main__':
-        main();
+        main()

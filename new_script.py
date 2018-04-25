@@ -2,6 +2,12 @@ import os
 import sys
 import csv
 
+import pandas as pd
+import numpy as np
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+
+from operator import itemgetter, attrgetter
 
 def season_determine(val):
         month_seasons = {"Jan": "Winter", "Feb": "Winter", "Dec": "Winter",
@@ -58,11 +64,17 @@ def main():
 
         # set te columns in rows so we can work on becomes a list of tuples
         # usage: final_data[row][column]
+        # DEBUG: use final_data = np.array(final_data) --> final_data[row,column] ?
         #
         final_data = zip(name, prod, age, imdb, meta, num_votes, day, month, year,
                         budget, box_office, multiplier)
 
+        final_np = np.array(final_data)
+
+        # Sorting by column
+        #
+        print final_np[np.argsort(final_np[:, 11])[::-1]][:, 0]
 
 
 if __name__ == '__main__':
-        main();
+        main()

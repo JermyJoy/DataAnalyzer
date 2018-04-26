@@ -84,12 +84,31 @@ def main():
         # this is just to test the sorting
         #
         z = 0
-        for col in multiplier_sort:
+        boffice = []
+        names = []
 
-            print 'name: ', col[0], '\nbudget:', col[9], '-->', 'multiplier: ', col[11]
-            z += 1
-            if z == 10:
+        for col in year_sort:
+            #print col[0], ': ', col[8]
+
+            if z == 0:
+                z += 1
+                continue
+
+            if col[8] != 'N/A':
+                names.append(col[0])
+                boffice.append(float(col[11]))
+            if len(boffice) == 1000:
                 break
+
+            # print 'name: ', col[0], '\nbudget:', col[9], '-->', 'multiplier: ', col[11]
+            z += 1
+
+        print len(boffice)
+        print len(names)
+        plt.plot(boffice)
+        plt.yticks(boffice, names)
+        plt.grid()
+        plt.show()
 
 
 if __name__ == '__main__':

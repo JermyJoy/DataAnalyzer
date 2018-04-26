@@ -91,7 +91,7 @@ def main():
         summer = seasons[3]
 
         for col in multiplier_sort:
-            print col[0], ': ', col[11]
+            # print col[0], ': ', col[11]
 
             if z == 0:
                 z += 1
@@ -115,6 +115,18 @@ def main():
 
 
         #print boffice
+
+
+        y = [3, 10, 7, 5, 3, 4.5, 6, 8.1]
+        N = len(seasons)
+        x = range(N)
+        width = 1/1.9
+        plt.bar(x, seasons[0], width, color="blue")
+
+
+        fig = plt.gcf()
+        plt.show()
+        #plot_url = plt.plot_mpl(fig, filename='mpl-basic-bar')
 
         '''plt.plot(boffice)
         plt.yticks(boffice, names)

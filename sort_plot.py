@@ -65,7 +65,7 @@ def main():
         # for the months to store to dict....
         # DEBUG: this is overwriting the months with seasons
         #
-        season = season_determine(month)
+        # season = season_determine(month)
 
         # set te columns in rows so we can work on becomes a list of tuples
         # usage: final_data[row, column]
@@ -84,32 +84,43 @@ def main():
         # this is just to test the sorting
         #
         z = 0
-        boffice = []
-        names = []
+        seasons = [[], [], [], []]
+        fall = seasons[0]
+        winter = seasons[1]
+        spring = seasons[2]
+        summer = seasons[3]
 
-        for col in year_sort:
-            print col[0], ': ', col[8]
+        for col in multiplier_sort:
+            print col[0], ': ', col[11]
 
             if z == 0:
                 z += 1
                 continue
+            if col[7] == 'Dec' or col[7] == 'Jan' or col[7] == 'Feb':
+                winter.append(col[7])
+
+            if col[7] == 'Mar' or col[7] == 'Apr' or col[7] == 'May':
+                spring.append(col[7])
+
+            if col[7] == 'Jun' or col[7] == 'Jul' or col[7] == 'Aug':
+                fall.append(col[7])
+
+            if col[7] == 'Sep' or col[7] == 'Oct' or col[7] == 'Nov':
+                summer.append(col[7])
 
 
-            names.append(col[0])
-            boffice.append(float(col[10]))
-            
 
             # print 'name: ', col[0], '\nbudget:', col[9], '-->', 'multiplier: ', col[11]
             z += 1
 
-        print len(boffice)
+
         #print boffice
-        print len(names)
-        plt.plot(boffice)
+
+        '''plt.plot(boffice)
         plt.yticks(boffice, names)
         plt.grid()
         plt.show()
-
+'''
 
 if __name__ == '__main__':
         main()

@@ -46,7 +46,7 @@ def main():
         # DEBUG: find a way to fix the year 'cuz its showing (ex: 21 for 1921)
         # DEBUG: fix the clean_up class cuz data are not clean clean
         #
-        with open('full_dataset.csv') as csv_file:
+        with open('full_dataset_cleaned.csv') as csv_file:
                 val = csv.reader(csv_file)
                 for row in val:
                         name.append(row[0])
@@ -88,22 +88,22 @@ def main():
         names = []
 
         for col in year_sort:
-            #print col[0], ': ', col[8]
+            print col[0], ': ', col[8]
 
             if z == 0:
                 z += 1
                 continue
 
-            if col[8] != 'N/A':
-                names.append(col[0])
-                boffice.append(float(col[11]))
-            if len(boffice) == 1000:
-                break
+
+            names.append(col[0])
+            boffice.append(float(col[10]))
+            
 
             # print 'name: ', col[0], '\nbudget:', col[9], '-->', 'multiplier: ', col[11]
             z += 1
 
         print len(boffice)
+        #print boffice
         print len(names)
         plt.plot(boffice)
         plt.yticks(boffice, names)

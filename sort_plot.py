@@ -88,7 +88,7 @@ def main():
 
             print 'name: ', col[0], '\nbudget:', col[9], '-->', 'multiplier: ', col[11]
             z += 1
-            if z == 100:
+            if z == 10:
                 break
 
 

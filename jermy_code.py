@@ -25,7 +25,7 @@ def main():
         multiplier = []; # 11
 
         print "starting..."
-        with open('full_dataset.csv') as csv_file:
+        with open('full_dataset_cleaned.csv') as csv_file:
                 val = csv.reader(csv_file)
                 for row in val:
                         name.append(row[0])
@@ -98,8 +98,8 @@ def main():
         multiplier_Nov = []
         multiplier_Dec = []
 
-        months = [1,2,3,4,5,6,7,8,9,10,11,12]
-        avg_months = [];
+        months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        avg_months = []
         #### Averages for the months and their respective multipliers #####
         for val in Jans:
                 multiplier_Jans.append(float(multiplier[val]))
@@ -140,6 +140,7 @@ def main():
         ###################################################################
 
         plt.plot(months,avg_months)
+        plt.yticks()
         plt.show()
 
         #####################################################################

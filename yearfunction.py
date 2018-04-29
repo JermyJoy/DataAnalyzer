@@ -5,9 +5,10 @@
 import os
 import sys
 import string
-import csv 
+import csv
 import matplotlib.pyplot as plt
 import numpy as np
+
 
 def processyearlydata(years):
     # pass to this function a list of years
@@ -15,7 +16,7 @@ def processyearlydata(years):
     #
     newyears = []
     for i in years:
-        
+
         try:
             k = ''.join(i.split())
             j = int(k)
@@ -27,6 +28,7 @@ def processyearlydata(years):
         except ValueError:
             newyears.append(0)
     return newyears
+
 
 # generate dictionary with all possible years as keys, if year matches
 # a key, store the index as a value in the dictionar
@@ -48,7 +50,7 @@ def getindexforyear(year):
     for i in range(len(year)):
         if year[i] in yeardict:
             yeardict[year[i]].append(i)
-            
+
     return yeardict
 
 
@@ -56,20 +58,26 @@ def getindexforyear(year):
 #
 def main(argv):
 
-    month = []; # 7
-    meta = []; # 4 
-    name = []; # 0
-    prod = []; # 1
-    age = []; # 2
-    imdb = []; # 3
-    num_votes = []; # 5
-    day = []; # 6
-    year = []; # 8
-    budget = []; # 9
-    box_office = []; # 10
-    multiplier = []; # 11
-    #####################################################################
     print "starting..."
+
+    # initializing the colunms
+    #
+    month = []  # 7
+    meta = []  # 4
+    name = []  # 0
+    prod = []  # 1
+    age = []  # 2
+    imdb = []  # 3
+    num_votes = []  # 5
+    day = []  # 6
+    year = []  # 8
+    budget = []  # 9
+    box_office = []  # 10
+    multiplier = []  # 11
+
+#####################################################################
+    # reading the clean dataset and fill the colunms
+    #
     with open('full_dataset_cleaned.csv') as csv_file:
         val = csv.reader(csv_file)
         for row in val:
@@ -85,39 +93,50 @@ def main(argv):
             budget.append(row[9])
             box_office.append(row[10])
             multiplier.append(row[11])
-    
-    
-    #print processyearlydata(year[1:])
 
-    newyears =  processyearlydata(year[1:])
-    
+#####################################################################
+    # adding the 1900s and the 2000s to the years column
+    #
+    newyears = processyearlydata(year[1:])
+
+    # getting the indexes of as dictionary
+    # { year: [indexes,...], year2: [indexes,...],...}
+    #
     index_val = getindexforyear(newyears)
+
+    # getting the multipliers of each year as nested list
+    #
     newmult = multiplier[1:]
     mult_vals = []
     for key in index_val:
         mult_deep = []
         for i in index_val[key]:
             mult_deep.append(float(newmult[i]))
-    
+
         mult_vals.append(mult_deep)
 
     print len(mult_vals)
+
+    # getting the average multiplier of each year
+    #
     mult_avg = []
     for i in mult_vals:
-        
         try:
             mult_avg.append(float(sum(i))/float(len(i)))
+
         except ZeroDivisionError:
             mult_avg.append(0.0)
+
         except TypeError:
             mult_avg.append(0.0)
-        
+
     print mult_avg
     print len(mult_avg)
+
     # Exit gracefully
     #
-    return 
-    
+    return
+
 
 # Begin gracefully
 #

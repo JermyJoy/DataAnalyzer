@@ -115,8 +115,6 @@ def main(argv):
 
         mult_vals.append(mult_deep)
 
-    print len(mult_vals)
-
     # getting the average multiplier of each year
     #
     mult_avg = []
@@ -130,8 +128,7 @@ def main(argv):
         except TypeError:
             mult_avg.append(0.0)
 
-    print mult_avg
-    print len(mult_avg)
+    # print mult_avg
 
     # Exit gracefully
     #

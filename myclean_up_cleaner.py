@@ -8,10 +8,13 @@ import csv
 from string import *
 
 
+# class to clean and process the data
+#
 class clean_up():
+    # initialize  needed columns
+    #
     def __init__(self):
-            # initialize columns
-            #
+
             self.name_of_movie = []
             self.length_of_movie = []
             self.release_date = []
@@ -27,12 +30,14 @@ class clean_up():
             self.Box_office = []
             self.gross_multiplier = []
 
+    # open the  NBCU_data file and fill the pull out the required columns
+    #
     def collect_data(self, csv_file):
             with open(csv_file, 'r') as csv_file:
                 reading = csv.reader(csv_file)
                 for lines in reading:
-                    # Depending on the column can append more data into an arry
                     # movie name is in the 1st index
+                    #
                     self.name_of_movie.append(lines[1])
                     # length of movie in mins is in the 13th index
                     #
@@ -65,7 +70,8 @@ class clean_up():
 
                 csv_file.close()
 
-    # checked
+    # a method to clean the cells that has unwanted values
+    #
     def clean_vals(self, myarg):
         clean = []
         for rating in myarg:
@@ -78,13 +84,16 @@ class clean_up():
 
         return clean
 
-    # checked
+    # remove the 'min' from the length column
+    #
     def min_remove(self):
         for index in range(1, len(self.length_of_movie)):
             self.length_of_movie[index] = self.length_of_movie[index].strip(' min')
         return
 
-    # checked
+    # separate the date column int three columns
+    # months days and years
+    #
     def clean_date(self):
 
         for date in range(0, len(self.release_date)):
@@ -103,12 +112,12 @@ class clean_up():
                 self.day.append('N/A')
         return
 
+    # This function removes all non-digits from a list.
+    # it was designed for the film budgets,
+    # but it will also remove strings longer than 20 chars in length.
+    #
     def clean_budget(self, budgetarg):
-        '''
-        This function removes all non-digits from a list.
-        It was designed for the film budgets. It will also remove
-        strings longer than 20 chars in length.
-        '''
+
         # Open new list
         new_budget = []
         for i in budgetarg:
@@ -119,6 +128,9 @@ class clean_up():
 
         return new_budget
 
+    # this method would find the multiplier of each movie
+    # by deviding the earnings by the budget
+    #
     def add_multiplier(self, box, budget):
 
         multiplier = []
@@ -136,38 +148,22 @@ class clean_up():
 
         return multiplier
 
+
 def main(argv):
-    print "program executing..."
+    print "cleaning the file..."
 
     clean = clean_up()
-    clean.collect_data('NBCU_data.csv')
-    '''    
-    clean.name_of_movie = clean.clean_vals(clean.name_of_movie)
-    clean.age_rating = clean.clean_vals(clean.age_rating)
-    clean.production = clean.clean_vals(clean.production)
-    clean.imbd_rating = clean.clean_vals(clean.imbd_rating)
-    clean.meta_rating = clean.clean_vals(clean.meta_rating)
-    clean.num_votes = clean.clean_vals(clean.num_votes)
-    '''
-    print len(clean.production)
-    print len(clean.imbd_rating)
-    print len(clean.meta_rating)
-    print len(clean.age_rating)
+    clean.collect_data(argv[0])
 
     clean.min_remove()
-    print len(clean.length_of_movie)
 
     clean.clean_date()
-    print len(clean.month)
 
     clean.budget = clean.clean_budget(clean.budget)
-    print len(clean.budget)
 
     clean.Box_office = clean.clean_budget(clean.Box_office)
-    print len(clean.Box_office)
 
     clean.gross_multiplier = clean.add_multiplier(clean.Box_office, clean.budget)
-    print len(clean.gross_multiplier)
 
     # remove existing header
     #
@@ -184,7 +180,7 @@ def main(argv):
     clean.Box_office.pop(0)
     clean.gross_multiplier.pop(0)
 
-    # insert column headers
+    # insert new column headers
     #
     clean.name_of_movie.insert(0, 'name')
     clean.production.insert(0, 'production')
